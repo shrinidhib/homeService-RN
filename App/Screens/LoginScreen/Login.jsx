@@ -1,4 +1,4 @@
-import { View, Text, Image , StyleSheet} from 'react-native'
+import { View, Text, Image , StyleSheet, TouchableOpacity} from 'react-native'
 import React from 'react'
 import Colors from '../../Utils/Colors'
 
@@ -20,13 +20,13 @@ export default function Login() {
                  textAlign:'center',
                   marginTop:20}}>Best App to find services near you which deliver professional services
             </Text>
-            <View style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={()=>console.log('click')}>
                 <Text style={{textAlign: 'center',
                     fontSize: 17,
                     color: Colors.PRIMARY}}>
                     Let's get Started</Text>
 
-            </View>
+            </TouchableOpacity>
        </View>
     </View>
   )
