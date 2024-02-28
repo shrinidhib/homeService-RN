@@ -7,10 +7,11 @@ export default function App() {
   return (
     <ClerkProvider publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
     <View style={styles.container}>
-     
+      {/* Sign in component */}
       <SignedIn>
           <Text>You are Signed in</Text>
       </SignedIn>
+      {/* sign out component */}
       <SignedOut>
           <Login/>
       </SignedOut>

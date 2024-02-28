@@ -1,9 +1,31 @@
 import { View, Text, Image , StyleSheet, TouchableOpacity} from 'react-native'
 import React from 'react'
-import Colors from '../../Utils/Colors'
+import * as WebBrowser from "expo-web-browser";
+import { useOAuth } from "@clerk/clerk-expo";
 
+import Colors from '../../Utils/Colors'
+import { useWarmUpBrowser } from '../../hooks/useWarmUpBrowser';
+
+
+WebBrowser.maybeCompleteAuthSession();
 
 export default function Login() {
+    useWarmUpBrowser();
+    const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+    const loginHandler = React.useCallback(async () => {
+        try {
+          const { createdSessionId, signIn, signUp, setActive } =
+            await startOAuthFlow();
+     
+          if (createdSessionId) {
+            setActive({ session: createdSessionId });
+          } else {
+            // Use signIn or signUp for next steps such as MFA
+          }
+        } catch (err) {
+          console.error("OAuth error", err);
+        }
+      }, []);
   return (
     <View style={{alignItems: 'center'}}>
       <Image source={require('./../../../assets/images/login.png')}
@@ -20,7 +42,7 @@ export default function Login() {
                  textAlign:'center',
                   marginTop:20}}>Best App to find services near you which deliver professional services
             </Text>
-            <TouchableOpacity style={styles.button} onPress={()=>console.log('click')}>
+            <TouchableOpacity style={styles.button} onPress={loginHandler}>
                 <Text style={{textAlign: 'center',
                     fontSize: 17,
                     color: Colors.PRIMARY}}>
