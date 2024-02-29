@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TextInput } from 'react-native'
 import React from 'react'
 import { useUser } from '@clerk/clerk-expo'
 import Colors from '../../Utils/Colors'
@@ -21,6 +21,10 @@ export default function Header() {
             <FontAwesome name="bookmark-o" size={27} color="white" />
         </View>
         {/* search bar section */}
+        <View style={styles.searchBarContainer}>
+            <TextInput placeholder='search..' style={styles.TextInput}/>
+            <FontAwesome style={styles.searchbtn} name="search" size={22} color={Colors.PRIMARY} />
+        </View>
     </View>
   )
 }
@@ -49,5 +53,26 @@ const styles=StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
+    },
+    TextInput:{
+        padding:7,
+        paddingHorizontal:16,
+        backgroundColor: Colors.WHITE,
+        width: '85%',
+        borderRadius: 8,
+        fontSize: 16
+    },
+    searchBarContainer:{
+        marginTop:15,
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10
+    },
+    searchbtn:{
+        backgroundColor: Colors.WHITE,
+        padding: 10,
+        borderRadius: 9
     }
 })
