@@ -14,15 +14,15 @@ export default function Header() {
                 <Image source={{uri:user?.imageUrl}}
                 style={styles.userImage}/>
                 <View>
-                    <Text style={{color:Colors.WHITE}}>Welcome</Text>
-                    <Text style={{color:Colors.WHITE, fontSize: 20}}>{user?.fullName}</Text>
+                    <Text style={{color:Colors.WHITE, fontFamily: 'outfit'}}>Welcome</Text>
+                    <Text style={{color:Colors.WHITE, fontSize: 20, fontFamily: 'outfit-medium'}}>{user?.fullName}</Text>
                 </View>
             </View>
             <FontAwesome name="bookmark-o" size={27} color="white" />
         </View>
         {/* search bar section */}
         <View style={styles.searchBarContainer}>
-            <TextInput placeholder='search..' style={styles.TextInput}/>
+            <TextInput placeholder='Search...' style={styles.TextInput}/>
             <FontAwesome style={styles.searchbtn} name="search" size={22} color={Colors.PRIMARY} />
         </View>
     </View>
@@ -60,7 +60,8 @@ const styles=StyleSheet.create({
         backgroundColor: Colors.WHITE,
         width: '85%',
         borderRadius: 8,
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'outfit'
     },
     searchBarContainer:{
         marginTop:15,
