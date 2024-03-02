@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import GlobalApi from '../../Utils/GlobalApi'
 
@@ -6,6 +6,7 @@ export default function Slider() {
     const [sliders,setSliders]=useState([])
     useEffect(()=>{
         getSliders()
+        console.log(sliders)
     },[])
     const getSliders=()=>{
         GlobalApi.getSlider().then(resp=>{
@@ -16,7 +17,32 @@ export default function Slider() {
    
   return (
     <View>
-      <Text>Slider</Text>
+      <Text style={styles.heading}>Offers for You</Text>
+      <FlatList
+      horizontal={true}
+      data={sliders}
+      showsHorizontalScrollIndicator={false}
+      renderItem={({item,index})=>(
+        <View style={{marginRight: 20}}>
+          <Image source={{uri:item?.image?.url}}
+          style={styles.sliderImage}/>
+        </View>
+      )
+      }/>
     </View>
   )
 }
+
+const styles=StyleSheet.create({
+  heading: {
+    fontSize: 20,
+    fontFamily: 'outfit-medium',
+    marginBottom: 10
+  },
+  sliderImage:{
+    width: 270,
+    height: 150,
+    borderRadius: 20,
+    objectFit:'fill'
+  }
+})

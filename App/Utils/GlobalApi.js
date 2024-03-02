@@ -16,6 +16,7 @@ const getSlider=async()=>{
       
     `
     const result=await request(MASTER_URL, query)
+    console.log("1",result)
     return result
 
 }
