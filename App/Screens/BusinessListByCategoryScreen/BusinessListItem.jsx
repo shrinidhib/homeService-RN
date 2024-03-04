@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function BusinessListByCategory() {
+export default function BusinessListItem() {
   return (
     <View>
-      <Text>BusinessListByCategory</Text>
+      <Text>BusinessListItem</Text>
     </View>
   )
 }
