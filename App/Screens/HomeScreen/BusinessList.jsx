@@ -1,6 +1,7 @@
 import { View, Text, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Heading from '../../Components/Heading'
+import BusinessListItemSmall from './BusinessListItemSmall'
 import GlobalApi from '../../Utils/GlobalApi'
 
 export default function BusinessList() {
@@ -19,10 +20,12 @@ export default function BusinessList() {
     <View style={{marginTop: 10}}>
       <Heading text={'Latest Businesses'} isViewAll={true}/>
       <FlatList
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
       data={BusinessList}
       renderItem={({item,index})=>(
-        <View>
-          <Text>{item.name}</Text>
+        <View style={{marginRight: 10}}>
+          <BusinessListItemSmall business={item}/>
         </View>
   )}/>
     </View>

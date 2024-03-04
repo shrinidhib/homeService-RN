@@ -59,7 +59,7 @@ export default function Login() {
 const styles=StyleSheet.create({
     loginImage:{
         width:230,
-        height:450,
+        height:350,
         marginTop:70,
         borderWidth: 4,
         borderColor: Colors.BLACK,
@@ -72,7 +72,7 @@ const styles=StyleSheet.create({
         marginTop: -20,
         borderTopLeftRadius:30,
         borderTopRightRadius: 30,
-        padding: 20
+        padding: 20,
 
     },
     button:{
