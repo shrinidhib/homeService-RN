@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -15,11 +15,11 @@ export default function BusinessDetailsScreen() {
     const [business,setBusiness]=useState()
     const navigation=useNavigation()
     useEffect(()=>{
-        setBusiness(param?.business)
+        setBusiness(param.business)
     },[param])
-  return (
+  return business && ( 
   
-    <View>
+    <ScrollView>
         <TouchableOpacity  onPress={()=>navigation.goBack()}style={styles.backBtnContainer}>
             <Ionicons name="arrow-back" size={30} color="black" />
         </TouchableOpacity>
@@ -54,7 +54,7 @@ export default function BusinessDetailsScreen() {
 
         
      
-    </View>
+    </ScrollView>
     
   )
 }
