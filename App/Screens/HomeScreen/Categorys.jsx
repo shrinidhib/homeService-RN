@@ -14,7 +14,6 @@ export default function Categorys() {
   const getCategories=()=>{
     GlobalApi.GetCategories().then(resp=>{
       setCategories(resp?.categories)
-      console.log(categories)
     })
   }
   

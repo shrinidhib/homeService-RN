@@ -7,11 +7,9 @@ export default function Slider() {
     const [sliders,setSliders]=useState([])
     useEffect(()=>{
         getSliders()
-        console.log(sliders)
     },[])
     const getSliders=()=>{
         GlobalApi.getSlider().then(resp=>{
-            console.log(resp)
             setSliders(resp?.sliders)
         })
     }

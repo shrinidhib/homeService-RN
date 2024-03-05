@@ -9,6 +9,7 @@ export default function BusinessPhotos({business}) {
         <Heading text={'Images'}/>
         <FlatList data={business?.images}
         numColumns={2}
+        
         renderItem={({item})=>(
             <Image source={{uri:item.url}} 
             style={{height: 120, width: '50%', flex: 1,
