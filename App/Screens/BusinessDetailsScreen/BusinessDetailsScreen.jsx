@@ -3,10 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+
 import Colors from '../../Utils/Colors';
+import Heading from '../../Components/Heading';
+import BusinessPhotos from './BusinessPhotos';
 
 export default function BusinessDetailsScreen() {
     const param=useRoute().params
+    const [isReadMore, setIsReadMore]=useState(false)
     const [business,setBusiness]=useState()
     const navigation=useNavigation()
     useEffect(()=>{
@@ -28,7 +33,23 @@ export default function BusinessDetailsScreen() {
                 padding: 3, borderRadius: 5, fontSize: 14}}>{business?.category.name}</Text>
             </View>
             
-            <Text>{business?.address}</Text>
+            <Text style={{fontSize:20, fontFamily: 'outfit', color: Colors.GRAY}}>
+                <MaterialIcons name="location-pin"  size={25} color={Colors.PRIMARY} />{business?.address}</Text>
+
+            <View style={{borderWidth: 0.4, borderColor: Colors.GRAY, marginTop: 30, marginBottom: 20}}></View>
+
+            <View>
+                <Heading text={"About Me"}/>
+                <Text style={{fontFamily: 'outfit', color: Colors.GRAY, lineHeight: 28, fontSize: 16}} numberOfLines={isReadMore?20:5}>{business?.about}</Text>
+                <TouchableOpacity onPress={()=>setIsReadMore((prev)=>!prev)}>
+                    <Text style={{color: Colors.PRIMARY, fontSize: 16, fontFamily:'outfit'}}>{isReadMore? 'Read Less':'Read More'}</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={{borderWidth: 0.4, borderColor: Colors.GRAY, marginTop: 30, marginBottom: 20}}></View>
+
+            <BusinessPhotos business={business}/>
+
         </View>
 
         
