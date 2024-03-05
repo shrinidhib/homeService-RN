@@ -11,6 +11,10 @@ import Heading from '../../Components/Heading';
 export default function BookingModal({hideModal}) {
     const navigator=useNavigation()
     const [timeList,setTimeList]=useState([])
+    const [selectedTime,setSelectedTime]=useState()
+    const [selectedDate,setSelectedDate]=useState()
+
+    
     useEffect(()=>{
         getTime();
     },[])
@@ -50,7 +54,7 @@ export default function BookingModal({hideModal}) {
         <Heading text={'Select Date'}/>
         <View style={styles.calenderContainer}> 
             <CalendarPicker
-                onDateChange={this.onDateChange}
+                onDateChange={setSelectedDate}
                 width={340}
                 minDate={Date.now()}
                 todayBackgroundColor={Colors.PRIMARY}
@@ -60,14 +64,15 @@ export default function BookingModal({hideModal}) {
         </View>
 
         {/* Time select section */}
-        <View>
+        <View style={{marginTop: 10}}>
+            <Heading text={'Select Time Slot'}/>
             <FlatList
             data={timeList}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             renderItem={({item,index})=>(
-                <TouchableOpacity >
-                    <Text style={styles.unselectedTime}>{item.time}</Text>
+                <TouchableOpacity style={{margin: 5}} onPress={()=>setSelectedTime(item.time)}>
+                    <Text style={[selectedTime==item.time? styles.selectedTime : styles.unselectedTime]}>{item.time}</Text>
                 </TouchableOpacity>
             )}
             />
@@ -85,9 +90,20 @@ const styles=StyleSheet.create({
         borderRadius: 15
     },
     selectedTime:{
-
+        padding: 10,
+        borderWidth: 1,
+        borderColor: Colors.PRIMARY,
+        borderRadius: 99,
+        paddingHorizontal: 18,
+        color: Colors.WHITE,
+        backgroundColor: Colors.PRIMARY
     },
     unselectedTime:{
-
+        padding: 10,
+        borderWidth: 1,
+        borderColor: Colors.PRIMARY,
+        borderRadius: 99,
+        paddingHorizontal: 18,
+        color: Colors.PRIMARY
     }
 })
