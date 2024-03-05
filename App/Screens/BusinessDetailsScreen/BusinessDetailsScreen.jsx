@@ -18,8 +18,8 @@ export default function BusinessDetailsScreen() {
         setBusiness(param.business)
     },[param])
   return business && ( 
-  
-    <ScrollView>
+    <View>
+    <ScrollView style={{height: '90%'}}>
         <TouchableOpacity  onPress={()=>navigation.goBack()}style={styles.backBtnContainer}>
             <Ionicons name="arrow-back" size={30} color="black" />
         </TouchableOpacity>
@@ -51,10 +51,26 @@ export default function BusinessDetailsScreen() {
             <BusinessPhotos business={business}/>
 
         </View>
-
-        
-     
     </ScrollView>
+    <View style={{display: 'flex', flexDirection: 'row', margin: 8, gap: 8, justifyContent:'space-around'}}>
+        <TouchableOpacity style={styles.messageBtn}>
+            <Text 
+            style={{textAlign: 'center',
+            fontFamily: 'outfit-medium',
+            color: Colors.PRIMARY,
+            fontSize: 18
+            }}>Message</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bookingBtn}>
+            <Text 
+            style={{textAlign: 'center',
+            fontFamily: 'outfit-medium',
+            color: Colors.WHITE,
+            fontSize: 18
+            }}>Book</Text>
+        </TouchableOpacity>
+    </View>
+    </View>
     
   )
 }
@@ -76,5 +92,23 @@ const styles=StyleSheet.create({
         gap: 10,
         alignItems: 'center'
 
+    },
+    messageBtn:{
+        padding: 15,
+        backgroundColor: Colors.WHITE,
+        borderWidth: 1,
+        borderColor: Colors.PRIMARY,
+        borderRadius: 99,
+        width: 150
+      
+    },
+    bookingBtn:{
+        padding: 15,
+        backgroundColor: Colors.PRIMARY,
+        borderWidth: 1,
+        borderColor: Colors.PRIMARY,
+        borderRadius: 99,
+        width: 150
+       
     }
 })
