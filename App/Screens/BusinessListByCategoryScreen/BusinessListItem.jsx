@@ -2,18 +2,21 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 import React from 'react'
 import Colors from '../../Utils/Colors'
 import { MaterialIcons } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function BusinessListItem({business}) {
+    const navigator=useNavigation()
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={()=>navigator.push('business-details', {business: business})} style={styles.container}>
       <Image source={{uri:business?.images[0]?.url}} style={styles.image}/>
       <View style={styles.subContainer}>
         <Text style={{fontFamily: 'outfit', color: Colors.GRAY, fontSize: 15}}>{business.contactPerson}</Text>
         <Text style={{fontFamily:'outfit-bold', fontSize: 19}}>{business.name}</Text>
         <Text style={{fontFamily: 'outfit', color: Colors.GRAY, fontSize: 16}}><MaterialIcons name="location-pin"  size={20} color={Colors.PRIMARY} />{business.address}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 const styles=StyleSheet.create({
