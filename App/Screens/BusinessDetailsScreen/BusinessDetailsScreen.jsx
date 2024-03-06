@@ -77,7 +77,9 @@ export default function BusinessDetailsScreen() {
     <Modal
     animationType='slide'
     visible={showModal}>
-        <BookingModal hideModal={()=>{
+        <BookingModal
+            businessId={business.id}
+            hideModal={()=>{
             console.log(1)
             setShowModal(false)}}/>
     </Modal>

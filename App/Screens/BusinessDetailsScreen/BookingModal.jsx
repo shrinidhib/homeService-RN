@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { View, Text, StyleSheet, TextInput, ScrollView, KeyboardAvoidingView, ToastAndroid } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
@@ -6,15 +6,19 @@ import { useNavigation } from '@react-navigation/native';
 import CalendarPicker from 'react-native-calendar-picker'
 import Colors from '../../Utils/Colors';
 import Heading from '../../Components/Heading';
+import GlobalApi from '../../Utils/GlobalApi';
+import {  useUser } from '@clerk/clerk-expo';
+import moment from 'moment';
 
 
 
-export default function BookingModal({hideModal}) {
+export default function BookingModal({businessId, hideModal}) {
     const navigator=useNavigation()
     const [timeList,setTimeList]=useState([])
     const [selectedTime,setSelectedTime]=useState()
     const [selectedDate,setSelectedDate]=useState()
     const [note,setNote]=useState('')
+    const {user}=useUser();
 
     
     useEffect(()=>{
@@ -43,6 +47,27 @@ export default function BookingModal({hideModal}) {
         }
         setTimeList(times)
     }
+
+    const createNewBooking=()=>{
+        if (!selectedDate || !selectedTime ){
+            ToastAndroid.show('Please select date and time', ToastAndroid.LONG)
+            return
+        }
+        const data={
+            userName: user?.fullName,
+            userEmail: user?.primaryEmailAddress.emailAddress,
+            time: selectedTime,
+            date: moment(selectedDate).format('DD-MM-yyyy'),
+            note: note,
+            businessId: businessId
+        }
+        GlobalApi.createBooking(data).then(resp=>{
+            console.log('resp: ',resp)
+            ToastAndroid.show('Booking Created Successfully!', ToastAndroid.LONG)
+            hideModal()
+        })
+    }
+
   return (
     <ScrollView>
         {/* keyboard avodiing view to make sure the text area is visible when user types */}
@@ -91,7 +116,7 @@ export default function BookingModal({hideModal}) {
 
         {/* Confirmation Button  */}
 
-        <TouchableOpacity style={{marginTop: 15}} >
+        <TouchableOpacity onPress={()=>createNewBooking()} style={{marginTop: 15}} >
             <Text style={styles.confirmButton}>Confirm & Book</Text>
         </TouchableOpacity>
       
