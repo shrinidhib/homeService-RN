@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, Modal } from 'react-native'
+import { View, Text, Image, StyleSheet, Modal, Linking } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { ScrollView, TouchableOpacity } from 'react-native'
@@ -19,6 +19,10 @@ export default function BusinessDetailsScreen() {
     useEffect(()=>{
         setBusiness(param.business)
     },[param])
+
+    const onMessageBtnclick=()=>{
+        Linking.openURL('mailto: '+business?.email+'?subject= I am looking for your service')
+    }   
   return business && ( 
     <View>
     <ScrollView style={{height: '90%'}}>
@@ -55,7 +59,7 @@ export default function BusinessDetailsScreen() {
         </View>
     </ScrollView>
     <View style={{display: 'flex', flexDirection: 'row', margin: 8, gap: 8, justifyContent:'space-around'}}>
-        <TouchableOpacity style={styles.messageBtn}>
+        <TouchableOpacity onPress={()=>onMessageBtnclick()} style={styles.messageBtn}>
             <Text 
             style={{textAlign: 'center',
             fontFamily: 'outfit-medium',

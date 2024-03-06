@@ -10,6 +10,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import Colors from '../Utils/Colors';
 import HomeNavigation from './HomeNavigation';
 import BookingNavigation from './BookingNavigation'
+import ProfileNavigations from './ProfileNavigations';
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
@@ -46,7 +47,7 @@ const TabNavigation = () => {
             )
     
        }} />
-        <Tab.Screen name='profile' component={ProfileScreen}
+        <Tab.Screen name='profile' component={ProfileNavigations}
          options={{
             tabBarLabel:({color})=>(
                 <Text style={{
