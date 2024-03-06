@@ -23,7 +23,7 @@ export default function BusinessDetailsScreen() {
     <View>
     <ScrollView style={{height: '90%'}}>
         <TouchableOpacity  onPress={()=>navigation.goBack()}style={styles.backBtnContainer}>
-            <Ionicons name="arrow-back" size={30} color="black" />
+            <Ionicons name="arrow-back" size={30} color="white" />
         </TouchableOpacity>
         <Image source={{uri: business?.images[0]?.url}} 
             style={{width: '100%', height: 300, zIndex: 1}}/>
@@ -90,7 +90,7 @@ const styles=StyleSheet.create({
     backBtnContainer:{
         zIndex: 10,
         position: 'absolute',
-        padding: 20
+        padding: 30
     },
     infoContainer:{
         padding: 20,

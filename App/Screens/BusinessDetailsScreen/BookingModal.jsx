@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import { FlatList, TouchableOpacity } from 'react-native';
@@ -8,11 +8,13 @@ import Colors from '../../Utils/Colors';
 import Heading from '../../Components/Heading';
 
 
+
 export default function BookingModal({hideModal}) {
     const navigator=useNavigation()
     const [timeList,setTimeList]=useState([])
     const [selectedTime,setSelectedTime]=useState()
     const [selectedDate,setSelectedDate]=useState()
+    const [note,setNote]=useState('')
 
     
     useEffect(()=>{
@@ -42,7 +44,9 @@ export default function BookingModal({hideModal}) {
         setTimeList(times)
     }
   return (
-    <View style={{padding: 20}}>
+    <ScrollView>
+        {/* keyboard avodiing view to make sure the text area is visible when user types */}
+    <KeyboardAvoidingView style={{padding: 20}}>
         <TouchableOpacity onPress={()=>hideModal()} style={{display: 'flex', flexDirection: 'row', gap: 10,
         alignItems: 'center', marginBottom: 15
             }}>
@@ -77,10 +81,24 @@ export default function BookingModal({hideModal}) {
             )}
             />
         </View>
+
+        {/* Note section */}
+
+        <View>
+            <Heading text={'Any suggessions? '}/>
+            <TextInput onChange={(text)=>setNote(text)} numberOfLines={4} multiline={true} placeholder='Note' style={styles.noteTextArea}/>
+        </View>
+
+        {/* Confirmation Button  */}
+
+        <TouchableOpacity style={{marginTop: 15}} >
+            <Text style={styles.confirmButton}>Confirm & Book</Text>
+        </TouchableOpacity>
       
         
 
-    </View>
+    </KeyboardAvoidingView>
+    </ScrollView>
   )
 }
 const styles=StyleSheet.create({
@@ -105,5 +123,25 @@ const styles=StyleSheet.create({
         borderRadius: 99,
         paddingHorizontal: 18,
         color: Colors.PRIMARY
+    },
+    noteTextArea:{
+        borderWidth: 1,
+        borderRadius: 15,
+        textAlignVertical: 'top',
+        padding: 20,
+        fontSize: 16,
+        fontFamily: 'outfit',
+        borderColor: Colors.PRIMARY
+    },
+    confirmButton:{
+        textAlign: 'center',
+        fontFamily: 'outfit-medium',
+        fontSize: 17,
+        backgroundColor: Colors.PRIMARY,
+        color: Colors.WHITE,
+        padding: 10,
+        borderRadius: 99,
+        elevation: 3,
+    
     }
 })
