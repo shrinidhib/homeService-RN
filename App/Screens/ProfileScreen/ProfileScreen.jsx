@@ -1,12 +1,13 @@
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, Linking } from 'react-native'
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
-import { useUser } from '@clerk/clerk-expo';
+import { useAuth, useUser } from '@clerk/clerk-expo';
 import Colors from '../../Utils/Colors';
 import { useNavigation } from '@react-navigation/native';
 
 export default function ProfileScreen() {
   const {user}=useUser()
+  const {isLoaded, signOut}=useAuth()
   const navigation=useNavigation()
   const profileMenu=[
     {
@@ -30,7 +31,6 @@ export default function ProfileScreen() {
       icon: 'log-out'
     }
   ]
-
   const handlePress=(item)=>{
     switch (item.name) {
       case 'Home':
@@ -42,7 +42,9 @@ export default function ProfileScreen() {
       case 'Contact Us':
         Linking.openURL('mailto: homeservice@gmail.com')
         break;
-    
+      case 'LogOut':
+        signOut()
+        break;
       default:
         break;
     }
