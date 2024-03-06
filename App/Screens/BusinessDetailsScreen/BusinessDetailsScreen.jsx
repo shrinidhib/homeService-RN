@@ -32,7 +32,7 @@ export default function BusinessDetailsScreen() {
             <View style={styles.subContainer}>
                 <Text style={{fontFamily: 'outfit-medium', color: Colors.PRIMARY, fontSize: 20}}>{business?.contactPerson} 🌟 </Text>
                 <Text style={{color: Colors.PRIMARY, backgroundColor: Colors.PRIMARY_LIGHT,
-                padding: 3, borderRadius: 5, fontSize: 14}}>{business?.category.name}</Text>
+                padding: 3, borderRadius: 5, fontSize: 14}}>{business?.category?.name}</Text>
             </View>
             
             <Text style={{fontSize:20, fontFamily: 'outfit', color: Colors.GRAY}}>
