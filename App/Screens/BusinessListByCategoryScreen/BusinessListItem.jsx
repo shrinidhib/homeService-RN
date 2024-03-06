@@ -15,7 +15,7 @@ export default function BusinessListItem({business, booking}) {
       <View style={styles.subContainer}>
         <Text style={{fontFamily: 'outfit', color: Colors.GRAY, fontSize: 15}}>{business?.contactPerson}</Text>
         <Text style={{fontFamily:'outfit-bold', fontSize: 19}}>{business?.name}</Text>
-        <Text style={{fontFamily: 'outfit', color: Colors.GRAY, fontSize: 16}}><MaterialIcons name="location-pin"  size={20} color={Colors.PRIMARY} />{business?.address}</Text>
+        {booking? <Text style={styles.bookingStatus}>{booking.bookingStatus}</Text>:<Text style={{fontFamily: 'outfit', color: Colors.GRAY, fontSize: 16}}><MaterialIcons name="location-pin"  size={20} color={Colors.PRIMARY} />{business?.address}</Text>}
 
         {booking?.id? 
         <Text style={{fontFamily: 'outfit', color: Colors.GRAY, fontSize: 16, margin: 2}}><AntDesign style={{marginRight: 10}} name="calendar" size={24} color={Colors.PRIMARY} />{booking.date} at {booking.time}</Text>  
@@ -43,6 +43,13 @@ const styles=StyleSheet.create({
     subContainer:{
         display: 'flex',
         gap: 10,
+    },
+    bookingStatus:{
+      backgroundColor: Colors.PRIMARY_LIGHT,
+      color: Colors.PRIMARY,
+      padding: 7,
+      borderRadius: 10,
+      alignSelf: 'flex-start'
     }
     
     
